@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:background="#14A2D8"
+         android:padding="10dp"
+         android:orientation="horizontal">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="0dp"
+             android:gravity="center_vertical"
+             android:orientation="horizontal"
+             android:layout_weight="1"
+             android:layout_gravity="start">
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:paddingEnd="10dp"
+                 android:background="@drawable/logo_bg"
+                 android:gravity="center"
+                 android:orientation="horizontal"
+                 android:paddingBottom="5dp"
+                 android:paddingStart="10dp"
+                 android:paddingTop="5dp">
+
+                <ImageView
+                     android:layout_height="35dp"
+                     android:layout_width="35dp"
+                     android:src="@drawable/logo_transparent"
+                     android:layout_marginEnd="5dp" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:textSize="10dp"
+                     android:fontFamily="@font/moderniz"
+                     android:textColor="#14A2D8"
+                     android:text="STI QR" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:background="#ECF5FF"
+         android:gravity="center_horizontal"
+         android:padding="30dp"
+         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/signup"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:fontFamily="@font/moderniz"
+                android:text="Student\nRegistration"
+                android:textAlignment="center"
+                android:textColor="#5EB7D9"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signup"
+                android:fontFamily="@font/poppins"
+                android:hint="Name"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textColor="#333"
+                android:textColorHint="#777" />
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signup"
+                android:fontFamily="@font/poppins"
+                android:hint="Student Email"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textColor="#333"
+                android:textColorHint="#777" />
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signup"
+                android:fontFamily="@font/poppins"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:textColor="#333"
+                android:textColorHint="#777" />
+
+            <EditText
+                android:id="@+id/studentNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signup"
+                android:fontFamily="@font/poppins"
+                android:hint="Student Number"
+                android:inputType="number"
+                android:padding="15dp"
+                android:textColor="#333"
+                android:textColorHint="#777" />
+
+            <Spinner
+                android:id="@+id/sectionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signup"
+                android:padding="15dp"
+                android:spinnerMode="dialog">
+
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/genderSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/signup"
+                android:padding="15dp"
+                android:spinnerMode="dialog">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:background="@drawable/login_btn"
+             android:textAlignment="center"
+             android:clickable="true"
+             android:padding="15dp"
+             android:fontFamily="@font/poppins"
+             android:textColor="#fff"
+             android:layout_marginTop="10dp"
+             android:id="@+id/signupButton"
+             android:text="Register" />
+
+    </LinearLayout>
+
+</LinearLayout>

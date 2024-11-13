@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:background="#14A2D8"
+         android:padding="10dp"
+         android:orientation="horizontal">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="0dp"
+             android:gravity="center_vertical"
+             android:orientation="horizontal"
+             android:layout_weight="1"
+             android:layout_gravity="start">
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:paddingEnd="10dp"
+                 android:background="@drawable/logo_bg"
+                 android:gravity="center"
+                 android:orientation="horizontal"
+                 android:paddingBottom="5dp"
+                 android:paddingStart="10dp"
+                 android:paddingTop="5dp">
+
+                <ImageView
+                     android:layout_height="35dp"
+                     android:layout_width="35dp"
+                     android:src="@drawable/logo_transparent"
+                     android:layout_marginEnd="5dp" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:textSize="10dp"
+                     android:fontFamily="@font/moderniz"
+                     android:textColor="#14A2D8"
+                     android:text="STI QR" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="0dp"
+             android:gravity="end"
+             android:layout_weight="1">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:background="@drawable/logout_btn"
+                 android:clickable="true"
+                 android:padding="5dp"
+                 android:fontFamily="@font/poppins"
+                 android:textColor="#fff"
+                 android:id="@+id/logout"
+                 android:layout_gravity="center_vertical"
+                 android:text="Log out" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:background="#ECF5FF"
+         android:padding="30dp"
+         android:orientation="vertical">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:orientation="vertical">
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:layout_marginBottom="10dp"
+                 android:background="@drawable/signup"
+                 android:gravity="center_horizontal"
+                 android:padding="15dp"
+                 android:orientation="vertical">
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:layout_marginBottom="10dp"
+                     android:textAlignment="center"
+                     android:fontFamily="@font/moderniz"
+                     android:textSize="15dp"
+                     android:textColor="#444"
+                     android:text="SHS Schedule" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_marginBottom="15dp"
+                     android:background="@drawable/signup_btn"
+                     android:clickable="true"
+                     android:textAlignment="center"
+                     android:padding="15dp"
+                     android:fontFamily="@font/poppins"
+                     android:textSize="15dp"
+                     android:textColor="#fff"
+                     android:id="@+id/grade8"
+                     android:text="Grade 8" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_marginBottom="15dp"
+                     android:background="@drawable/signup_btn"
+                     android:clickable="true"
+                     android:textAlignment="center"
+                     android:padding="15dp"
+                     android:fontFamily="@font/poppins"
+                     android:textSize="15dp"
+                     android:textColor="#fff"
+                     android:id="@+id/grade11"
+                     android:text="Grade 11" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_marginBottom="15dp"
+                     android:background="@drawable/signup_btn"
+                     android:clickable="true"
+                     android:textAlignment="center"
+                     android:padding="15dp"
+                     android:fontFamily="@font/poppins"
+                     android:textSize="15dp"
+                     android:textColor="#fff"
+                     android:id="@+id/grade12"
+                     android:text="Grade 12" />
+
+            </LinearLayout>
+
+            <TextView
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:background="@drawable/ic_qr"
+                 android:gravity="center"
+                 android:clickable="true"
+                 android:textAlignment="center"
+                 android:padding="20dp"
+                 android:textSize="30dp"
+                 android:fontFamily="@font/poppins"
+                 android:textColor="#fff"
+                 android:text="Scan Qr"
+                 android:id="@+id/btn_scan" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
