@@ -1,36 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-<manifest 
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    
-    <application 
-        android:allowBackup="true" 
-        android:icon="@drawable/ic_logo" 
-        android:roundIcon="@mipmap/ic_launcher" 
-        android:label="@string/app_name" 
-        android:supportsRtl="true" 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_logo"
+        android:label="STI Scan"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity 
-            android:name="MainActivity" 
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+
             android:exported="true">
             <intent-filter>
-                <action 
-                    android:name="android.intent.action.MAIN" />
-                <category 
-                    android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="StudentDashboardActivity"> </activity>
-        <activity android:name="SignupActivity"> </activity>
-       <activity android:name="ScannerActivity"> </activity>
-        <activity android:name="StudentInfoActivity"> </activity>
-        
-        <activity android:name=".CaptureAct"
-    android:screenOrientation="portrait"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".ShsActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".ClassInfoActivity"
+            android:screenOrientation="portrait"
+
+            android:exported="false" />
+        <activity
+            android:name=".AdvisoryClassActivity"
+            android:screenOrientation="portrait"
+
+            android:exported="false" />
+        <activity
+            android:name=".TeacherActivity"
+            android:screenOrientation="portrait"
+
+            android:exported="false" />
+        <activity
+            android:name=".DaySchedActivity"
+            android:screenOrientation="portrait"
+
+            android:exported="false" />
+        <activity
+            android:name=".ScheduleActivity"
+            android:screenOrientation="portrait"
+
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".StudentDashboardActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".SignupActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ScannerActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".StudentInfoActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".CaptureAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
+
 </manifest>

@@ -16,7 +16,7 @@ import java.time.Instant;
 
 public class ScannerActivity extends AppCompatActivity {
 
-    private TextView btn_scan, logout;
+    private TextView btn_scan, logout, grade12;
     private FirebaseFirestore firestore;
 
     @Override
@@ -35,8 +35,19 @@ public class ScannerActivity extends AppCompatActivity {
         logout.setOnClickListener(v -> {
                 getSharedPreferences("LoginPrefs", MODE_PRIVATE).edit().clear().apply();
             Intent intent = new Intent(ScannerActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(0, 0);
+
+        });
+
+        grade12 = findViewById(R.id.grade12);
+        grade12.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ShsActivity.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+
         });
     }
 
@@ -66,12 +77,14 @@ public class ScannerActivity extends AppCompatActivity {
                             String name = document.getString("name");
                             String section = document.getString("section");
                             String studentNumber = document.getString("studentNumber");
+                            String gender = document.getString("gender");
 
                             // Pass data to StudentInfoActivity
                             Intent intent = new Intent(ScannerActivity.this, StudentInfoActivity.class);
                             intent.putExtra("name", name);
                             intent.putExtra("section", section);
                             intent.putExtra("studentNumber", studentNumber);
+                            intent.putExtra("gender", gender);
                             startActivity(intent);
                         } else {
                             Toast.makeText(ScannerActivity.this, "User not found in database.", Toast.LENGTH_SHORT).show();
@@ -82,4 +95,8 @@ public class ScannerActivity extends AppCompatActivity {
                 });
         }
     });
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
 }

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.test2"
-    compileSdk = 33
+    compileSdk = 34
     
     defaultConfig {
         applicationId = "com.example.test2"
@@ -49,7 +49,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.zxing:core:3.4.1")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("androidx.activity:activity:1.9.2")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 
-    // Make sure there are no legacy support dependencies like:
-    // implementation 'com.android.support:support-compat:25.3.1'
 }

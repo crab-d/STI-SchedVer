@@ -43,7 +43,9 @@
                      android:textSize="10dp"
                      android:fontFamily="@font/moderniz"
                      android:textColor="#14A2D8"
-                     android:text="STI QR" />
+                    android:text="STI SCAN"
+
+                    />
 
             </LinearLayout>
 
@@ -128,6 +130,33 @@
                 android:padding="15dp"
                 android:textColor="#333"
                 android:textColorHint="#777" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Section"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu" >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Gender"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu" >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
                 android:id="@+id/sectionSpinner"

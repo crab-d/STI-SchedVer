@@ -12,9 +12,9 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class StudentDashboardActivity extends AppCompatActivity {
 
-    private TextView  nameTextView, emailTextView, studentNumberTextView, sectionTextView, logout;
+    private TextView  nameTextView, emailTextView, studentNumberTextView, sectionTextView, logout, schedule;
     private ImageView qrImageView, studentPicImageView;
-    
+    private String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +28,7 @@ public class StudentDashboardActivity extends AppCompatActivity {
         sectionTextView = findViewById(R.id.sectionTextView);
         qrImageView = findViewById(R.id.qrImageView);
         studentPicImageView = findViewById(R.id.studentPic);
-        
-        
-        
+        schedule = findViewById(R.id.schedule);
         
         logout = findViewById(R.id.logout);
 
@@ -38,9 +36,20 @@ public class StudentDashboardActivity extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         String email = getIntent().getStringExtra("email");
         String studentNumber = getIntent().getStringExtra("studentNumber");
-        String section = getIntent().getStringExtra("section");
+        section = getIntent().getStringExtra("section");
         String userId = getIntent().getStringExtra("userID");
         String gender = getIntent().getStringExtra("gender");
+
+        schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentDashboardActivity.this, ScheduleActivity.class);
+                intent.putExtra("section", section);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+
+            }
+        });
 
         if (userId == null) {
             name = getSharedPreferences("LoginPrefs", MODE_PRIVATE).getString("name", null);
@@ -77,8 +86,11 @@ public class StudentDashboardActivity extends AppCompatActivity {
 
             // Redirect to login screen
             Intent intent = new Intent(StudentDashboardActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
+            overridePendingTransition(0, 0);
+
         });
         
         Log.d("StudentDashboard", "User ID: " + userId);
@@ -92,5 +104,10 @@ public class StudentDashboardActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
     }
 }

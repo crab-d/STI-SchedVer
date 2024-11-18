@@ -3,6 +3,8 @@
      xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_height="match_parent"
      android:layout_width="match_parent"
+    android:background="#FFF"
+
      android:orientation="vertical">
 
     <LinearLayout
@@ -43,7 +45,9 @@
                      android:textSize="10dp"
                      android:fontFamily="@font/moderniz"
                      android:textColor="#14A2D8"
-                     android:text="STI QR" />
+                    android:text="STI SCAN"
+
+                      />
 
             </LinearLayout>
 
@@ -102,19 +106,6 @@
                      android:textColor="#444"
                      android:text="SHS Schedule" />
 
-                <TextView
-                     android:layout_height="wrap_content"
-                     android:layout_width="match_parent"
-                     android:layout_marginBottom="15dp"
-                     android:background="@drawable/signup_btn"
-                     android:clickable="true"
-                     android:textAlignment="center"
-                     android:padding="15dp"
-                     android:fontFamily="@font/poppins"
-                     android:textSize="15dp"
-                     android:textColor="#fff"
-                     android:id="@+id/grade8"
-                     android:text="Grade 8" />
 
                 <TextView
                      android:layout_height="wrap_content"

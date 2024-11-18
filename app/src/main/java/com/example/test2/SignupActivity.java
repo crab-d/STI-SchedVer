@@ -2,12 +2,14 @@ package com.example.test2;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -22,8 +24,8 @@ import java.util.Map;
 public class SignupActivity extends AppCompatActivity {
 
     private EditText nameEditText, emailEditText, passwordEditText, studentNumberEditText;
-    private Spinner sectionSpinner, genderSpinner;
-    private TextView signupButton;
+    private AutoCompleteTextView sectionAutoCompleteTextView, genderAutoCompleteTextView;
+    TextView signupButton;
 
     private FirebaseFirestore firestore;
 
@@ -40,22 +42,23 @@ public class SignupActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         studentNumberEditText = findViewById(R.id.studentNumberEditText);
-        sectionSpinner = findViewById(R.id.sectionSpinner);
         signupButton = findViewById(R.id.signupButton);
-        genderSpinner = findViewById(R.id.genderSpinner);
 
-        // Set up the section spinner with options
-        String[] sections = {"ITM101", "ITM102", "STEM101", "ABM101"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sections);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sectionSpinner.setAdapter(adapter);
-        
+        // Initialize AutoCompleteTextViews
+        sectionAutoCompleteTextView = findViewById(R.id.autoCompleteTextViewSection);
+        genderAutoCompleteTextView = findViewById(R.id.autoCompleteTextViewGender);
+
+        // Setup adapter for Section
+        String[] sections = {"ITM302", "STEM302"};
+        ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sections);
+        sectionAutoCompleteTextView.setAdapter(sectionAdapter);
+
+        // Setup adapter for Gender
         String[] gender = {"Male", "Female"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, gender);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSpinner.setAdapter(adapter1);
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, gender);
+        genderAutoCompleteTextView.setAdapter(genderAdapter);
 
-        // Set up button click listener
+        // Set button click listener
         signupButton.setOnClickListener(view -> signUpUser());
     }
 
@@ -65,9 +68,11 @@ public class SignupActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String studentNumber = studentNumberEditText.getText().toString().trim();
-        String section = sectionSpinner.getSelectedItem().toString();  // Get selected section from Spinner
-        String gender = genderSpinner.getSelectedItem().toString();
-        
+
+        // Get selected section and gender from AutoCompleteTextView
+        String section = sectionAutoCompleteTextView.getText().toString().trim();
+        String gender = genderAutoCompleteTextView.getText().toString().trim();
+
         // Validate required fields
         if (TextUtils.isEmpty(name)) {
             nameEditText.setError("Name is required");
@@ -111,14 +116,12 @@ public class SignupActivity extends AppCompatActivity {
 
         // Check if email already exists in Firestore
         firestore.collection("users")
-                .whereEqualTo("email", email)  // Query for existing email
+                .whereEqualTo("email", email)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
-                        // Email already exists
-                        emailEditText.setError("Email already exists, message us for assistance.");
+                        emailEditText.setError("Account already exists. Not you? message us for assistance.");
                     } else {
-                        // Proceed with registration
                         generateUserIdAndRegister(name, email, password, studentNumber, section, gender);
                     }
                 })
@@ -128,45 +131,48 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void generateUserIdAndRegister(String name, String email, String password, String studentNumber, String section, String gender) {
-    // Reference to the counter document for tracking user ID
-    DocumentReference counterRef = firestore.collection("counters").document("userCounter");
+        DocumentReference counterRef = firestore.collection("counters").document("userCounter");
 
-    firestore.runTransaction((Transaction.Function<Void>) transaction -> {
-        // Get the current count for generating unique user ID
-        DocumentSnapshot counterDoc = transaction.get(counterRef);
+        firestore.runTransaction((Transaction.Function<Void>) transaction -> {
+            DocumentSnapshot counterDoc = transaction.get(counterRef);
 
-        long currentCount;
-        if (counterDoc.exists()) {
-            currentCount = counterDoc.getLong("count") != null ? counterDoc.getLong("count") : 0;
-        } else {
-            currentCount = 0;
-        }
-        long newCount = currentCount + 1;
-        String userId = "user" + newCount;
+            long currentCount;
+            if (counterDoc.exists()) {
+                currentCount = counterDoc.getLong("count") != null ? counterDoc.getLong("count") : 0;
+            } else {
+                currentCount = 0;
+            }
+            long newCount = currentCount + 1;
+            String userId = "user" + newCount;
 
-        // Update the counter document
-        transaction.set(counterRef, new HashMap<String, Object>() {{
-            put("count", newCount);
-        }});
+            // Update counter document
+            transaction.set(counterRef, new HashMap<String, Object>() {{
+                put("count", newCount);
+            }});
 
-        // Create user data map
-        Map<String, Object> user = new HashMap<>();
-        user.put("name", name);
-        user.put("email", email);
-        user.put("password", password);
-        user.put("studentNumber", studentNumber);
-        user.put("section", section);
-                user.put("gender", gender);
+            // Create new user document
+            Map<String, Object> user = new HashMap<>();
+            user.put("name", name);
+            user.put("email", email);
+            user.put("password", password);
+            user.put("studentNumber", studentNumber);
+            user.put("section", section);
+            user.put("gender", gender);
 
-        // Set the user data with the generated user ID as the document ID
-        transaction.set(firestore.collection("users").document(userId), user);
+            transaction.set(firestore.collection("users").document(userId), user);
 
-        return null;
-    }).addOnSuccessListener(aVoid -> {
-        Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
-        // You can navigate to the login or home screen here
-    }).addOnFailureListener(e -> {
-        Toast.makeText(SignupActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-    });
-}
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            Toast.makeText(SignupActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+            // Redirect to another activity (if needed)
+        }).addOnFailureListener(e -> {
+            Toast.makeText(SignupActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
 }
