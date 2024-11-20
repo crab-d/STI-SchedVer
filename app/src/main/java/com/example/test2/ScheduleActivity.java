@@ -90,7 +90,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         saturday.setOnClickListener(v -> {
             Intent intent = new Intent(this, DaySchedActivity.class);
-            intent.putExtra("day", "Saturday");
+            intent.putExtra("day", "saturday");
             intent.putExtra("section", section);
 
             startActivity(intent);

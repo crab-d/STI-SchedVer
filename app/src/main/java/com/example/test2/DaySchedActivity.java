@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,11 +22,13 @@ public class DaySchedActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ScheduleAdapter scheduleAdapter;
     private List<Schedule> scheduleList;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_sched);
+
         emptyMsg = findViewById(R.id.msg);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -37,7 +40,6 @@ public class DaySchedActivity extends AppCompatActivity {
         String section = getIntent().getStringExtra("section");
         String day = getIntent().getStringExtra("day");
 
-        // Validate section and day before proceeding
         if (section == null || section.isEmpty()) {
             Log.e("DaySchedActivity", "Section is null or empty");
             Toast.makeText(this, "Invalid section", Toast.LENGTH_SHORT).show();
@@ -50,7 +52,6 @@ public class DaySchedActivity extends AppCompatActivity {
             return;
         }
 
-        // Set the dayTextView (initialize it)
         dayTextView = findViewById(R.id.dayTextView);  // Make sure the ID matches your layout
         dayTextView.setText(day);
 
@@ -70,6 +71,9 @@ public class DaySchedActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
 
         });
+
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void fetchScheduleData(String section, String day) {
@@ -79,6 +83,8 @@ public class DaySchedActivity extends AppCompatActivity {
                 .collection(day)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (DocumentSnapshot document : queryDocumentSnapshots) {
                             String subject = document.getString("subject");

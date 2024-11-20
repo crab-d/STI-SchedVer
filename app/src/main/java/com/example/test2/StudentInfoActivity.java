@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,11 +32,14 @@ public class StudentInfoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ScheduleAdapter scheduleAdapter;
     private List<Schedule> scheduleList;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_info);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         String gender = getIntent().getStringExtra("gender");
         studentPicImageView = findViewById(R.id.studentPic);
@@ -117,6 +121,8 @@ public class StudentInfoActivity extends AppCompatActivity {
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
                         if (!queryDocumentSnapshots.isEmpty()) {
+                            progressBar.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
                             for (DocumentSnapshot document : queryDocumentSnapshots) {
                                 String subject = document.getString("subject");
                                 String time = document.getString("time");

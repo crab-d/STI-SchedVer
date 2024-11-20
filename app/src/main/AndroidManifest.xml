@@ -9,15 +9,17 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
-        android:label="STI Scan"
+        android:label="STI SchedVer"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".StudentListActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,57 +28,51 @@
         </activity>
         <activity
             android:name=".ShsActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ClassInfoActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AdvisoryClassActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TeacherActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DaySchedActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ScheduleActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StudentDashboardActivity"
+        <activity
+            android:name=".StudentDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignupActivity"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".SignupActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".ScannerActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".StudentInfoActivity"
-            android:screenOrientation="portrait"
-            />
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".ScannerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StudentInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CaptureAct"
             android:screenOrientation="portrait"

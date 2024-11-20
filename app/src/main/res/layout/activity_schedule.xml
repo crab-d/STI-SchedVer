@@ -45,7 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/moderniz"
-                    android:text="STI SCAN"
+                    android:text="STI SchedVer"
+
 
                     android:textColor="#14A2D8"
                     android:textSize="10dp" />

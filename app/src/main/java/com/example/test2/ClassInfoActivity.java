@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ClassInfoActivity extends AppCompatActivity {
 
-    private TextView logout, earlyOut, status, schedule;
+    private TextView logout, earlyOut, status, schedule, sectionName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,10 @@ public class ClassInfoActivity extends AppCompatActivity {
 
         earlyOut = findViewById(R.id.earlyOut);
         status = findViewById(R.id.status);
+        sectionName = findViewById(R.id.section);
+
+        String section = getIntent().getStringExtra("sectionName");
+        sectionName.setText(section);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("grade12").document("ITM302");
@@ -64,7 +68,7 @@ public class ClassInfoActivity extends AppCompatActivity {
                 Log.e("Firestore", "Error getting document", task.getException());
             }
         });
-        String section = "ITM302";
+
         schedule = findViewById(R.id.schedule);
         schedule.setOnClickListener(view -> {
             Intent intent = new Intent(this, ScheduleActivity.class);
@@ -86,6 +90,16 @@ public class ClassInfoActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
 
         });
+
+        //class List
+        TextView classlist = findViewById(R.id.classList);
+        classlist.setOnClickListener(view -> {
+            Intent intent = new Intent(this, StudentListActivity.class);
+            intent.putExtra("section", section);
+            startActivity(intent);
+            overridePendingTransition(0,0);
+        });
+
     }
     public void onBackPressed() {
         super.onBackPressed();

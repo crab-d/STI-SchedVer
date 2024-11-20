@@ -7,7 +7,6 @@ public class Schedule {
     private String professor;
     private String day;
 
-    // Constructor
     public Schedule(String day, String subject, String time, String room, String professor) {
         this.day = day;
         this.subject = subject;
@@ -16,7 +15,6 @@ public class Schedule {
         this.professor = professor;
     }
 
-    // Getters and setters
     public String getSubject() {
         return subject;
     }

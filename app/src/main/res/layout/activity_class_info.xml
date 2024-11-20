@@ -84,7 +84,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ITM302"
+            android:id="@+id/section"
             android:background="@drawable/signup"
             android:textAlignment="center"
             android:padding="15dp"
@@ -130,7 +130,8 @@
             android:background="@drawable/student_block"
             android:padding="10dp"
             android:textAlignment="center"
-            android:id="@+id/student"
+            android:id="@+id/classList"
+            android:clickable="true"
             android:textColor="#fff"
             android:fontFamily="@font/poppins"
             android:layout_marginBottom="15dp"

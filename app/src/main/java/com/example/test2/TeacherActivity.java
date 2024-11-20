@@ -10,14 +10,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TeacherActivity extends AppCompatActivity {
 
-    private TextView teacherSched, advisoryClass, logout;
+    private TextView teacherSched, advisoryClass, logout, name, email;
     private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_teacher);
+
+        String intentName = getSharedPreferences("LoginPrefs", MODE_PRIVATE).getString("name", null);
+        String intentEmail = getSharedPreferences("LoginPrefs", MODE_PRIVATE).getString("email", null);
+
+        name = findViewById(R.id.name);
+        name.setText("Name : " + intentName);
+
+        email = findViewById(R.id.email);
+        email.setText("Email : " + intentEmail);
+
 
         teacherSched = findViewById(R.id.schedule);
         advisoryClass = findViewById(R.id.advisoryClass);
@@ -25,6 +34,7 @@ public class TeacherActivity extends AppCompatActivity {
 
         advisoryClass.setOnClickListener(view -> {
             Intent intent = new Intent(TeacherActivity.this, AdvisoryClassActivity.class);
+            intent.putExtra("advisor", "Jayven Menes");
             startActivity(intent);
             overridePendingTransition(0,0);
         });

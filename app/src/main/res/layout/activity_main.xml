@@ -89,6 +89,7 @@
              android:layout_width="match_parent"
              android:background="@drawable/signup_btn"
              android:clickable="true"
+            android:fontFamily="@font/poppins"
              android:textAlignment="center"
              android:padding="7dp"
              android:textColor="#fff"

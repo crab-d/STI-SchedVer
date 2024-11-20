@@ -16,7 +16,7 @@ import java.time.Instant;
 
 public class ScannerActivity extends AppCompatActivity {
 
-    private TextView btn_scan, logout, grade12;
+    private TextView btn_scan, logout, grade12, grade11;
     private FirebaseFirestore firestore;
 
     @Override
@@ -45,6 +45,16 @@ public class ScannerActivity extends AppCompatActivity {
         grade12 = findViewById(R.id.grade12);
         grade12.setOnClickListener(view -> {
             Intent intent = new Intent(this, ShsActivity.class);
+            intent.putExtra("grade", "grade12");
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+
+        });
+
+        grade11 = findViewById(R.id.grade11);
+        grade11.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ShsActivity.class);
+            intent.putExtra("grade", "grade11");
             startActivity(intent);
             overridePendingTransition(0, 0);
 

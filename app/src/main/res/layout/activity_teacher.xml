@@ -44,7 +44,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/moderniz"
-                    android:text="STI SCAN"
+                    android:text="STI SchedVer"
+
 
                     android:textColor="#14A2D8"
                     android:textSize="10dp" />
@@ -103,7 +104,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name : Jayven Menes"
+                android:id="@+id/name"
                 android:textColor="#111"
                 android:fontFamily="@font/poppins"
                 android:textSize="15dp" />
@@ -111,7 +112,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email : jayven.menes@cubao.sti.edu.ph"
+                android:id="@+id/email"
                 android:textColor="#111"
                 android:fontFamily="@font/poppins"
                 android:textSize="15dp" />

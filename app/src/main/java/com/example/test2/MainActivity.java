@@ -139,65 +139,88 @@ public class MainActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(0,0);
 
-        } else if (email.equals("jayven.menes@cubao.sti.edu.ph") && password.equals("qwertyui")) {
-            getSharedPreferences("LoginPrefs", MODE_PRIVATE)
-                    .edit()
-                    .putBoolean("isTeacher", true)
-                    .apply();
-            Intent intent = new Intent(MainActivity.this, TeacherActivity.class);
-            startActivity(intent);
-            finish();
+//        } else if (email.equals("jayven.menes@cubao.sti.edu.ph") && password.equals("qwertyui")) {
+//            getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+//                    .edit()
+//                    .putBoolean("isTeacher", true)
+//                    .apply();
+//            Intent intent = new Intent(MainActivity.this, TeacherActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
         } else {
-            firestore.collection("users")
+            firestore.collection("teachers")
                     .whereEqualTo("email", email)
                     .whereEqualTo("password", password)
                     .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            if (!querySnapshot.isEmpty()) {
-                                // User found, retrieve user data
-                                DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-                                String name = documentSnapshot.getString("name");
-                                String studentNumber = documentSnapshot.getString("studentNumber");
-                                String section = documentSnapshot.getString("section");
-                                String userID = documentSnapshot.getId();  // This is the userID (document name)
-                                String gender = documentSnapshot.getString("gender");
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                if (!queryDocumentSnapshots.isEmpty()) {
+                                    DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                                    String name = documentSnapshot.getString("name");
+                                    getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+                                            .edit()
+                                            .putBoolean("isTeacher", true)
+                                            .putString("name", name)
+                                            .putString("email", email)
+                                            .apply();
 
-                                // Save login state and user details in SharedPreferences
-                                getSharedPreferences("LoginPrefs", MODE_PRIVATE)
-                                        .edit()
-                                        .putBoolean("isLoggedIn", true)
-                                        .putString("name", name)
-                                        .putString("email", email)
-                                        .putString("studentNumber", studentNumber)
-                                        .putString("section", section)
-                                        .putString("userID", userID)
-                                        .putString("gender", gender)
-                                        .apply();
+                                    Intent intent = new Intent(this, TeacherActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    overridePendingTransition(0,0);
+                                } else {
+                                    firestore.collection("users")
+                                            .whereEqualTo("email", email)
+                                            .whereEqualTo("password", password)
+                                            .get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    QuerySnapshot querySnapshot = task.getResult();
+                                                    if (!querySnapshot.isEmpty()) {
+                                                        DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                                                        String name = documentSnapshot.getString("name");
+                                                        String studentNumber = documentSnapshot.getString("studentNumber");
+                                                        String section = documentSnapshot.getString("section");
+                                                        String userID = documentSnapshot.getId();  // This is the userID (document name)
+                                                        String gender = documentSnapshot.getString("gender");
+
+                                                        // Save login state and user details in SharedPreferences
+                                                        getSharedPreferences("LoginPrefs", MODE_PRIVATE)
+                                                                .edit()
+                                                                .putBoolean("isLoggedIn", true)
+                                                                .putString("name", name)
+                                                                .putString("email", email)
+                                                                .putString("studentNumber", studentNumber)
+                                                                .putString("section", section)
+                                                                .putString("userID", userID)
+                                                                .putString("gender", gender)
+                                                                .apply();
 
 
-                                Intent intent = new Intent(MainActivity.this, StudentDashboardActivity.class);
-                                intent.putExtra("name", name);
-                                intent.putExtra("email", email);
-                                intent.putExtra("studentNumber", studentNumber);
-                                intent.putExtra("section", section);
-                                intent.putExtra("userID", userID);
-                                intent.putExtra("gender", gender);
-                                startActivity(intent);
-                                overridePendingTransition(0,0);
+                                                        Intent intent = new Intent(MainActivity.this, StudentDashboardActivity.class);
+                                                        intent.putExtra("name", name);
+                                                        intent.putExtra("email", email);
+                                                        intent.putExtra("studentNumber", studentNumber);
+                                                        intent.putExtra("section", section);
+                                                        intent.putExtra("userID", userID);
+                                                        intent.putExtra("gender", gender);
+                                                        startActivity(intent);
+                                                        overridePendingTransition(0,0);
 
-                                finish();
-                                overridePendingTransition(0,0);
+                                                        finish();
+                                                        overridePendingTransition(0,0);
 
-                            } else {
-                                loginStatusText.setVisibility(TextView.VISIBLE);
-                                loginStatusText.setText("Incorrect email or password. Please try again.");
-                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                                    } else {
+                                                        loginStatusText.setVisibility(TextView.VISIBLE);
+                                                        loginStatusText.setText("Incorrect email or password. Please try again.");
+                                                    }
+                                                } else {
+                                                    Toast.makeText(MainActivity.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            });
+
         }
     }
 

@@ -45,7 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/moderniz"
-                    android:text="STI SCAN"
+                    android:text="STI SchedVer"
+
 
                     android:textColor="#14A2D8"
                     android:textSize="10dp" />
@@ -76,12 +77,20 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:indeterminate="true" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sectionRecyclerView"
         android:layout_width="match_parent"
         android:layout_margin="15dp"
+        android:visibility="gone"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"/>

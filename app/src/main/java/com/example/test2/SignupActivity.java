@@ -2,37 +2,59 @@ package com.example.test2;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
     private EditText nameEditText, emailEditText, passwordEditText, studentNumberEditText;
-    private AutoCompleteTextView sectionAutoCompleteTextView, genderAutoCompleteTextView;
-    TextView signupButton;
-
+    private AutoCompleteTextView auto_complete_section, auto_complete_gender;
+    private TextView signupButton;
+    private ArrayAdapter<String> adapterItems, genderAdapterItems;
+    ProgressBar progressBar;
     private FirebaseFirestore firestore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        progressBar = findViewById(R.id.progressBar);
+        LinearLayout layout = findViewById(R.id.layout);
+        layout.setVisibility(View.GONE); // Hide layout initially
+        progressBar.setVisibility(View.VISIBLE); // Show progress bar
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // Initialize Firebase Firestore
         firestore = FirebaseFirestore.getInstance();
@@ -44,22 +66,61 @@ public class SignupActivity extends AppCompatActivity {
         studentNumberEditText = findViewById(R.id.studentNumberEditText);
         signupButton = findViewById(R.id.signupButton);
 
-        // Initialize AutoCompleteTextViews
-        sectionAutoCompleteTextView = findViewById(R.id.autoCompleteTextViewSection);
-        genderAutoCompleteTextView = findViewById(R.id.autoCompleteTextViewGender);
+        auto_complete_section = findViewById(R.id.auto_complete_section);
 
-        // Setup adapter for Section
-        String[] sections = {"ITM302", "STEM302"};
-        ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, sections);
-        sectionAutoCompleteTextView.setAdapter(sectionAdapter);
-
-        // Setup adapter for Gender
+        // Initialize gender dropdown
         String[] gender = {"Male", "Female"};
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, gender);
-        genderAutoCompleteTextView.setAdapter(genderAdapter);
+        auto_complete_gender = findViewById(R.id.auto_complete_gender);
+        genderAdapterItems = new ArrayAdapter<>(this, R.layout.list_item, gender);
+        auto_complete_gender.setAdapter(genderAdapterItems);
 
-        // Set button click listener
+        // Fetch section data
+        fetchSections();
+
         signupButton.setOnClickListener(view -> signUpUser());
+    }
+
+    private void fetchSections() {
+        List<String> sectionList = new ArrayList<>();
+
+        // Fetch sections for both grade11 and grade12
+        Task<QuerySnapshot> grade12Task = firestore.collection("grade12").get();
+        Task<QuerySnapshot> grade11Task = firestore.collection("grade11").get();
+
+        // Combine tasks
+        Task<List<QuerySnapshot>> combinedTask = Tasks.whenAllSuccess(grade12Task, grade11Task);
+
+        combinedTask.addOnSuccessListener(querySnapshots -> {
+            // Add data from grade12
+            QuerySnapshot grade12Snapshot = querySnapshots.get(0);
+            for (QueryDocumentSnapshot document : grade12Snapshot) {
+                sectionList.add(document.getId());
+            }
+
+            // Add data from grade11
+            QuerySnapshot grade11Snapshot = querySnapshots.get(1);
+            for (QueryDocumentSnapshot document : grade11Snapshot) {
+                sectionList.add(document.getId());
+            }
+
+            // Update the adapter with fetched sections
+            adapterItems = new ArrayAdapter<>(this, R.layout.list_item, sectionList);
+            auto_complete_section.setAdapter(adapterItems);
+
+            // Show layout and hide progress bar
+            progressBar.setVisibility(View.GONE);
+            LinearLayout layout = findViewById(R.id.layout);
+            layout.setVisibility(View.VISIBLE);
+
+        }).addOnFailureListener(e -> {
+            // Handle errors
+            Toast.makeText(this, "Failed to fetch sections: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("FirestoreError", "Error fetching sections", e);
+
+            progressBar.setVisibility(View.GONE);
+            LinearLayout layout = findViewById(R.id.layout);
+            layout.setVisibility(View.VISIBLE); // Still show the form to avoid blocking the user
+        });
     }
 
     private void signUpUser() {
@@ -70,8 +131,8 @@ public class SignupActivity extends AppCompatActivity {
         String studentNumber = studentNumberEditText.getText().toString().trim();
 
         // Get selected section and gender from AutoCompleteTextView
-        String section = sectionAutoCompleteTextView.getText().toString().trim();
-        String gender = genderAutoCompleteTextView.getText().toString().trim();
+        String section = auto_complete_section.getText().toString().trim();
+        String gender =  auto_complete_gender.getText().toString().trim();
 
         // Validate required fields
         if (TextUtils.isEmpty(name)) {

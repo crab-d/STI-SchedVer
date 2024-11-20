@@ -3,7 +3,10 @@ package com.example.test2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,7 @@ public class ShsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SectionAdapter sectionAdapter;
     private List<Section> sectionList;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +39,26 @@ public class ShsActivity extends AppCompatActivity {
         // Initialize RecyclerView and other views
         recyclerView = findViewById(R.id.sectionRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         // Initialize your section list (e.g., from Firestore or a static list)
         sectionList = new ArrayList<>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String grade = getIntent().getStringExtra("grade");
 
-        db.collection("grade12").get().addOnCompleteListener(task -> {
+        db.collection(grade).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                sectionList.clear(); // Clear the existing list to avoid duplication
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                sectionList.clear();
                 for (DocumentSnapshot document : task.getResult()) {
 
                     String sectionName = document.getId();
                     sectionList.add(new Section(sectionName));
                 }
-                sectionAdapter.notifyDataSetChanged(); // Notify adapter about the new data
+                sectionAdapter.notifyDataSetChanged();
             } else {
                 Log.e("Firestore", "Error getting sections", task.getException());
             }
