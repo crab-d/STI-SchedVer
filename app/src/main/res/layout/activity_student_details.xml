@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:background="#FFF"
+     android:gravity="center_horizontal"
+     android:orientation="vertical"
+     android:paddingBottom="15dp"
+     android:id="@+id/coordinator">
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:background="#14A2D8"
+         android:padding="10dp"
+         android:orientation="horizontal">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="0dp"
+             android:gravity="center_vertical"
+             android:orientation="horizontal"
+             android:layout_weight="1"
+             android:layout_gravity="start">
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:paddingEnd="10dp"
+                 android:background="@drawable/logo_bg"
+                 android:gravity="center"
+                 android:orientation="horizontal"
+                 android:paddingBottom="5dp"
+                 android:paddingStart="10dp"
+                 android:paddingTop="5dp">
+
+                <ImageView
+                     android:layout_height="35dp"
+                     android:layout_width="35dp"
+                     android:layout_marginEnd="5dp"
+                     android:src="@drawable/logo_transparent" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:fontFamily="@font/moderniz"
+                     android:textSize="10dp"
+                     android:textColor="#14A2D8"
+                     android:text="STI SchedVer" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="0dp"
+             android:gravity="end"
+             android:layout_weight="1">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:background="@drawable/logout_btn"
+                 android:clickable="true"
+                 android:padding="5dp"
+                 android:fontFamily="@font/poppins"
+                 android:textColor="#fff"
+                 android:id="@+id/logout"
+                 android:layout_gravity="center_vertical"
+                 android:text="Log out" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:background="#fff"
+         android:gravity=""
+         android:padding="25dp"
+         android:orientation="vertical">
+
+        <ImageView
+             android:layout_height="150dp"
+             android:layout_width="150dp"
+             android:layout_marginBottom="10dp"
+             android:scaleType="centerCrop"
+             android:background="#CCCCCC"
+             android:id="@+id/studentPicture"
+             android:layout_gravity="center" />
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:background="@drawable/student_block"
+             android:padding="15dp"
+             android:orientation="vertical">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:id="@+id/nameD" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:id="@+id/studentNumberD" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:id="@+id/sectionD" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:id="@+id/emailD" />
+            
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:id="@+id/genderD" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:id="@+id/enrollment_statusD" />
+
+        </LinearLayout>
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:visibility="gone"
+             android:background="@drawable/notif"
+             android:textAlignment="center"
+             android:padding="10dp"
+             android:fontFamily="@font/poppins"
+             android:textSize="15dp"
+             android:textColor="#222"
+             android:layout_marginTop="20dp"
+             android:id="@+id/status"
+             android:text="Early out status : TRUE" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:visibility="visible"
+             android:background="@drawable/student_block"
+             android:textAlignment="center"
+             android:padding="10dp"
+             android:fontFamily="@font/poppins"
+             android:textSize="15dp"
+             android:textColor="#fff"
+             android:layout_marginTop="20dp"
+             android:id="@+id/earlyOut_btn"
+             android:text="Early Out" />
+
+    </LinearLayout>
+
+</LinearLayout>

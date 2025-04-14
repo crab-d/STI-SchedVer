@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     android:layout_marginEnd="15dp"
+     android:background="@drawable/signup"
+     android:clickable="true"
+     android:padding="10dp"
+     android:orientation="horizontal"
+     android:layout_marginTop="15dp"
+     android:layout_marginStart="15dp"
+     android:focusable="true">
+
+    <HorizontalScrollView
+         android:layout_height="match_parent"
+         android:layout_width="0dp"
+         android:paddingEnd="15dp"
+         android:orientation="vertical"
+         android:layout_weight="1">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:orientation="vertical">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="14sp"
+                 android:fontFamily="@font/poppins"
+                 android:textColor="#111"
+                 android:id="@+id/nameTextView"
+                 android:text="Name" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="14sp"
+                 android:fontFamily="@font/poppins"
+                 android:textColor="#111"
+                 android:id="@+id/studentNumberTextView"
+                 android:text="Student Number" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+         android:layout_height="match_parent"
+         android:layout_width="0dp"
+         android:visibility="visible"
+         android:gravity="center"
+         android:layout_weight="0.4">
+
+        <ImageView
+             android:layout_height="100dp"
+             android:layout_width="100dp"
+             android:background="@drawable/signup"
+             android:id="@+id/studentPic" />
+
+    </LinearLayout>
+
+</LinearLayout>

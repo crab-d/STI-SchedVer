@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:background="#14A2D8"
+     android:orientation="vertical"
+     android:id="@+id/main"
+     tools:context=".MainActivity">
+
+    <LinearLayout
+         android:layout_height="0dp"
+         android:layout_width="match_parent"
+         android:background="@drawable/logo2_bg"
+         android:padding="20dp"
+         android:layout_weight="0.4">
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="0dp"
+         android:layout_width="match_parent"
+         android:paddingEnd="30dp"
+         android:background="@drawable/rounded"
+         android:orientation="vertical"
+         android:paddingStart="30dp"
+         android:layout_weight="0.5">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:visibility="gone"
+             android:gravity="center"
+             android:orientation="vertical"
+             android:id="@+id/versionUpdate">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:fontFamily="@font/moderniz"
+                 android:textSize="13dp"
+                android:textAlignment="center"
+                 android:textColor="#222"
+                 android:text="REQUIRED VERSION UPDATE!" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:background="#050C36"
+                 android:clickable="true"
+                 android:padding="10dp"
+                 android:fontFamily="@font/poppins"
+                 android:textSize="15dp"
+                 android:textColor="#fff"
+                 android:layout_marginTop="5dp"
+                 android:id="@+id/link" />
+
+        </LinearLayout>
+
+        <ProgressBar
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:visibility="gone"
+             android:id="@+id/loading" />
+
+        <ScrollView
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:id="@+id/form">
+
+            <LinearLayout
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:orientation="vertical">
+
+                <EditText
+                     android:layout_height="40dp"
+                     android:layout_width="match_parent"
+                     android:padding="7dp"
+                     android:textColor="#000"
+                     android:singleLine="true"
+                     android:layout_marginTop="50dp"
+                     android:layout_marginBottom="5dp"
+                     android:background="@drawable/input"
+                     android:hint="Username"
+                     android:textColorHint="#666"
+                     android:paddingLeft="10dp"
+                     android:maxLines="1"
+                     android:id="@+id/emailEditText" />
+
+                <EditText
+                     android:layout_height="40dp"
+                     android:layout_width="match_parent"
+                     android:padding="7dp"
+                     android:singleLine="true"
+                     android:textColor="#000"
+                     android:layout_marginBottom="5dp"
+                     android:background="@drawable/input"
+                     android:hint="Password"
+                     android:textColorHint="#666"
+                     android:paddingLeft="10dp"
+                     android:maxLines="1"
+                     android:inputType="textPassword"
+                     android:id="@+id/passwordEditText" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:visibility="gone"
+                     android:textSize="8dp"
+                     android:textColor="@android:color/holo_red_dark"
+                     android:id="@+id/loginStatusText"
+                     android:text="" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:layout_marginBottom="15dp"
+                     android:textSize="8dp"
+                     android:textColor="#000"
+                     android:layout_gravity="end"
+                     android:text="Forgot Password? Contact us for assistance" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_marginBottom="10dp"
+                     android:background="@drawable/login_btn"
+                     android:clickable="true"
+                     android:textAlignment="center"
+                     android:padding="7dp"
+                     android:fontFamily="@font/poppins"
+                     android:textColor="#fff"
+                     android:id="@+id/loginButton"
+                     android:text="Login" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:background="@drawable/signup_btn"
+                     android:clickable="true"
+                     android:textAlignment="center"
+                     android:padding="7dp"
+                     android:fontFamily="@font/poppins"
+                     android:textColor="#fff"
+                     android:id="@+id/signupBTN"
+                     android:text="Sign Up" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="0dp"
+         android:layout_width="match_parent"
+         android:gravity="center"
+         android:background="#050C36"
+         android:layout_weight=".025">
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:fontFamily="@font/poppins"
+             android:textSize="8dp"
+             android:textColor="#fff"
+             android:text="Found bug? Message us for maintenance"
+             android:layout_gravity="center" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="8dp"
+             android:fontFamily="@font/poppins"
+             android:textColor="#fff"
+             android:layout_marginStart="5dp"
+             android:id="@+id/linkITM"
+             android:layout_gravity="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="0dp"
+         android:layout_width="match_parent"
+         android:background="#050C36"
+         android:gravity="center"
+         android:layout_weight=".025">
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:fontFamily="@font/poppins"
+             android:textSize="8dp"
+             android:textColor="#fff"
+             android:text="© 2023 ITM302 Group-3"
+             android:layout_gravity="center" />
+
+    </LinearLayout>
+
+</LinearLayout>

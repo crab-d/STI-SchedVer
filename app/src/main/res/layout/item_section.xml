@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
+
+    <TextView
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:layout_marginEnd="10dp"
+         android:padding="10dp"
+         android:textSize="15sp"
+         android:textColor="#222"
+         android:layout_marginTop="10dp"
+         android:layout_marginStart="10dp"
+         android:background="@drawable/notif"
+         android:textAlignment="center"
+         android:fontFamily="@font/poppins"
+         android:id="@+id/sectionTextView"
+         android:text="test" />
+
+</LinearLayout>
